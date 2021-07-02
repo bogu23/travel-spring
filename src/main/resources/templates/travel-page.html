@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Destination</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Europa Agency</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Offers</a>
+                </li>
+            </ul>
+        </div>
+
+        <p th:text=" 'Hello ' +  ${}"></p>
+        <a th:href="logout" type="button" class="btn btn-primary">Logout</a>
+
+    </div>
+</nav>
+<div class="container">
+    <h2>List of travel destinations</h2>
+    <a th:href="@{addDestinationPage}" type="button" class="btn btn-primary">Add Destination</a>
+    <div th:each="destination: ${destinations}">
+        <p th:if="${destination.country == null}" th:text="${destination.name}"></p>
+        <p th:if="${destination.country != null}"
+           th:text="${destination.name} + ' (' + ${destination.country.name} + ')'"></p>
+        <p style="padding:20px" th:text="${destination.description}"></p>
+        <a th:href="@{editDestinationPage(id=${destination.id})}" type="button" class="btn btn-success">Edit</a>
+        <a th:href="@{deleteDestination(id=${destination.id})}" type="button" class="btn btn-danger">Delete</a>
+        <a th:href="@{offers(id=${destination.id})}" type="button" class="btn btn-warning">See offers</a>
+        <a th:href="@{addOfferPage(id=${destination.id})}" type="button" class="btn btn-success">Add offer</a>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+</html>

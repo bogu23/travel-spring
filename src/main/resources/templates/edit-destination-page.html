@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit destination</title>
+</head>
+<body>
+
+<h2>Edit destination</h2>
+
+<form th:action="editDestination" method="post" th:object="${destination}">
+
+    <label for="id">Destination name</label><br>
+    <input type="text" readonly id="id" th:field="*{id}" name="id"><br>
+
+  <label for="destinationName">Destination name</label><br>
+  <input type="text" id="destinationName" th:field="*{name}" name="destinationName"><br>
+  <label for="description">Description</label><br>
+  <input type="text" id="description" th:field="*{description}" name="description"><br><br>
+  <input type="submit" value="Save changes">
+
+    <div>
+        <label for="countries">Choose a country:</label>
+        <select name="countries" id="countries" th:field="*{country.id}">
+            <option  >Other</option>
+            <option th:each="country: ${countryModelList}" th:value="${country.id}" th:text="${country.name}"></option>
+
+        </select>
+    </div>
+
+</form>
+
+</body>
+</html>
